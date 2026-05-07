@@ -1,0 +1,78 @@
+chartSource: oci://registry-1.docker.io/io2060/hologram-generic-ai-agent-chart
+chartVersion: v1.11.2
+
+global:
+  domain: agents.team-e.teams.eafit.testnet.verana.network
+
+nameOverride: 'samuel-bot-chart'
+
+credentialDefinitionId: 'did:webvh:QmPZBrmehNXxY4eRL2a9F52sCfkQfToPHM8R427sNS2F1N:avatar.eafit.testnet.verana.network/resources/zQmdzYfqKe6ypc9NbRMHbCFvgnrqCwbWjBK2odKYrRePaTu'
+
+chatbot:
+  ingress:
+    enabled: false
+  env:
+    - name: APP_PORT
+      value: '3003'
+    - name: LOG_LEVEL
+      value: '3'
+    - name: LLM_PROVIDER
+      value: 'openai'
+    - name: OPENAI_MODEL
+      value: 'gpt-4o-mini'
+    - name: OPENAI_BASE_URL
+      value: 'https://api.openai.com/v1'
+    - name: OPENAI_TEMPERATURE
+      value: '0.5'
+    - name: VECTOR_STORE
+      value: 'redis'
+    - name: VECTOR_INDEX_NAME
+      value: 'samuel-bot_index'
+    - name: RAG_PROVIDER
+      value: 'langchain'
+    - name: RAG_DOCS_PATH
+      value: '/app/rag/docs'
+    - name: AGENT_MEMORY_BACKEND
+      value: 'redis'
+    - name: AGENT_MEMORY_WINDOW
+      value: '20'
+    - name: REDIS_URL
+      value: 'redis://samuel-bot-chart-redis.{{ .Release.Namespace }}:6379'
+    - name: VS_AGENT_ADMIN_URL
+      value: 'http://samuel-bot.{{ .Release.Namespace }}:3000'
+    - name: POSTGRES_HOST
+      value: 'samuel-bot-chart-postgres.{{ .Release.Namespace }}'
+    - name: CREDENTIAL_DEFINITION_ID
+      value: 'did:webvh:QmPZBrmehNXxY4eRL2a9F52sCfkQfToPHM8R427sNS2F1N:avatar.eafit.testnet.verana.network/resources/zQmdzYfqKe6ypc9NbRMHbCFvgnrqCwbWjBK2odKYrRePaTu'
+  agentPack:
+    enabled: true
+    name: samuel-bot
+    mountPath: /app/agent-packs/samuel-bot
+    fileName: agent-pack.yaml
+    existingConfigMap: 'samuel-bot-chart-agent-pack'
+
+stats:
+  enabled: false
+
+artemis:
+  enabled: false
+
+vs-agent-chart:
+  name: samuel-bot
+  didcommLabel: 'Samuel bot'
+  didcommInvitationImageUrl: 'https://hologram.zone/images/github.svg'
+  eventsBaseUrl: http://samuel-bot-chart-chatbot:3003
+  ingress:
+    host: "samuel-bot.{{ .Values.global.domain }}"
+    tlsSecret: "samuel-bot.{{ .Values.global.domain }}-cert"
+  extraEnv:
+    - name: AGENT_WALLET_ID
+      value: "Samuel bot"
+    - name: AGENT_WALLET_KEY
+      value: ""
+    - name: USE_CORS
+      value: "true"
+    - name: REDIS_HOST
+      value: "samuel-bot-chart-redis"
+    - name: AGENT_LOG_LEVEL
+      value: "3"

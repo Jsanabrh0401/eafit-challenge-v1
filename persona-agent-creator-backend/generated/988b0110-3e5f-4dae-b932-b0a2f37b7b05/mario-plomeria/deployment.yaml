@@ -1,0 +1,78 @@
+chartSource: oci://registry-1.docker.io/io2060/hologram-generic-ai-agent-chart
+chartVersion: v1.11.2
+
+global:
+  domain: agents.team-e.teams.eafit.testnet.verana.network
+
+nameOverride: 'mario-plomeria-chart'
+
+credentialDefinitionId: 'did:webvh:QmPZBrmehNXxY4eRL2a9F52sCfkQfToPHM8R427sNS2F1N:avatar.eafit.testnet.verana.network/resources/zQmdzYfqKe6ypc9NbRMHbCFvgnrqCwbWjBK2odKYrRePaTu'
+
+chatbot:
+  ingress:
+    enabled: false
+  env:
+    - name: APP_PORT
+      value: '3003'
+    - name: LOG_LEVEL
+      value: '3'
+    - name: LLM_PROVIDER
+      value: 'openai'
+    - name: OPENAI_MODEL
+      value: 'gpt-4o-mini'
+    - name: OPENAI_BASE_URL
+      value: 'https://api.openai.com/v1'
+    - name: OPENAI_TEMPERATURE
+      value: '0.4'
+    - name: VECTOR_STORE
+      value: 'redis'
+    - name: VECTOR_INDEX_NAME
+      value: 'mario-plomeria_index_1778086034610'
+    - name: RAG_PROVIDER
+      value: 'langchain'
+    - name: RAG_DOCS_PATH
+      value: '/app/rag/docs/mario-plomeria-1778086034610'
+    - name: AGENT_MEMORY_BACKEND
+      value: 'redis'
+    - name: AGENT_MEMORY_WINDOW
+      value: '20'
+    - name: REDIS_URL
+      value: 'redis://mario-plomeria-chart-redis.{{ .Release.Namespace }}:6379'
+    - name: VS_AGENT_ADMIN_URL
+      value: 'http://mario-plomeria.{{ .Release.Namespace }}:3000'
+    - name: POSTGRES_HOST
+      value: 'mario-plomeria-chart-postgres.{{ .Release.Namespace }}'
+    - name: CREDENTIAL_DEFINITION_ID
+      value: 'did:webvh:QmPZBrmehNXxY4eRL2a9F52sCfkQfToPHM8R427sNS2F1N:avatar.eafit.testnet.verana.network/resources/zQmdzYfqKe6ypc9NbRMHbCFvgnrqCwbWjBK2odKYrRePaTu'
+  agentPack:
+    enabled: true
+    name: mario-plomeria
+    mountPath: /app/agent-packs/mario-plomeria
+    fileName: agent-pack.yaml
+    existingConfigMap: 'mario-plomeria-chart-agent-pack'
+
+stats:
+  enabled: false
+
+artemis:
+  enabled: false
+
+vs-agent-chart:
+  name: mario-plomeria
+  didcommLabel: 'Mario Plomeria'
+  didcommInvitationImageUrl: 'https://i.ibb.co/r2fbswmV/f1805b981331.jpg'
+  eventsBaseUrl: http://mario-plomeria-chart-chatbot:3003
+  ingress:
+    host: "mario-plomeria.{{ .Values.global.domain }}"
+    tlsSecret: "mario-plomeria.{{ .Values.global.domain }}-cert"
+  extraEnv:
+    - name: AGENT_WALLET_ID
+      value: "Mario Plomeria"
+    - name: AGENT_WALLET_KEY
+      value: ""
+    - name: USE_CORS
+      value: "true"
+    - name: REDIS_HOST
+      value: "mario-plomeria-chart-redis"
+    - name: AGENT_LOG_LEVEL
+      value: "3"

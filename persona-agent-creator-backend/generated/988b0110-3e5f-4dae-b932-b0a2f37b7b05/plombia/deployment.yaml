@@ -1,0 +1,78 @@
+chartSource: oci://registry-1.docker.io/io2060/hologram-generic-ai-agent-chart
+chartVersion: v1.11.2
+
+global:
+  domain: agents.team-e.teams.eafit.testnet.verana.network
+
+nameOverride: 'plombia-chart'
+
+credentialDefinitionId: 'did:webvh:QmPZBrmehNXxY4eRL2a9F52sCfkQfToPHM8R427sNS2F1N:avatar.eafit.testnet.verana.network/resources/zQmdzYfqKe6ypc9NbRMHbCFvgnrqCwbWjBK2odKYrRePaTu'
+
+chatbot:
+  ingress:
+    enabled: false
+  env:
+    - name: APP_PORT
+      value: '3003'
+    - name: LOG_LEVEL
+      value: '3'
+    - name: LLM_PROVIDER
+      value: 'openai'
+    - name: OPENAI_MODEL
+      value: 'gpt-4o-mini'
+    - name: OPENAI_BASE_URL
+      value: 'https://api.openai.com/v1'
+    - name: OPENAI_TEMPERATURE
+      value: '0.4'
+    - name: VECTOR_STORE
+      value: 'redis'
+    - name: VECTOR_INDEX_NAME
+      value: 'plombia_index_1778106214625'
+    - name: RAG_PROVIDER
+      value: 'langchain'
+    - name: RAG_DOCS_PATH
+      value: '/app/rag/docs/plombia-1778106214625'
+    - name: AGENT_MEMORY_BACKEND
+      value: 'redis'
+    - name: AGENT_MEMORY_WINDOW
+      value: '20'
+    - name: REDIS_URL
+      value: 'redis://plombia-chart-redis.{{ .Release.Namespace }}:6379'
+    - name: VS_AGENT_ADMIN_URL
+      value: 'http://plombia.{{ .Release.Namespace }}:3000'
+    - name: POSTGRES_HOST
+      value: 'plombia-chart-postgres.{{ .Release.Namespace }}'
+    - name: CREDENTIAL_DEFINITION_ID
+      value: 'did:webvh:QmPZBrmehNXxY4eRL2a9F52sCfkQfToPHM8R427sNS2F1N:avatar.eafit.testnet.verana.network/resources/zQmdzYfqKe6ypc9NbRMHbCFvgnrqCwbWjBK2odKYrRePaTu'
+  agentPack:
+    enabled: true
+    name: plombia
+    mountPath: /app/agent-packs/plombia
+    fileName: agent-pack.yaml
+    existingConfigMap: 'plombia-chart-agent-pack'
+
+stats:
+  enabled: false
+
+artemis:
+  enabled: false
+
+vs-agent-chart:
+  name: plombia
+  didcommLabel: 'PlombIA'
+  didcommInvitationImageUrl: 'https://i.ibb.co/sdSMC5sG/3841bf9c171f.png'
+  eventsBaseUrl: http://plombia-chart-chatbot:3003
+  ingress:
+    host: "plombia.{{ .Values.global.domain }}"
+    tlsSecret: "plombia.{{ .Values.global.domain }}-cert"
+  extraEnv:
+    - name: AGENT_WALLET_ID
+      value: "PlombIA"
+    - name: AGENT_WALLET_KEY
+      value: ""
+    - name: USE_CORS
+      value: "true"
+    - name: REDIS_HOST
+      value: "plombia-chart-redis"
+    - name: AGENT_LOG_LEVEL
+      value: "3"

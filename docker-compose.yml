@@ -1,0 +1,39 @@
+services:
+  backend:
+    build:
+      context: ./persona-agent-creator-backend
+      dockerfile: Dockerfile
+    container_name: persona-agent-creator-backend
+    env_file:
+      - ./persona-agent-creator-backend/.env
+    environment:
+      PORT: 3000
+      DB_PATH: data/db.json
+      GENERATED_OUTPUT_DIR: generated
+    ports:
+      - "3000:3000"
+    volumes:
+      - backend_data:/app/data
+      - backend_generated:/app/generated
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./persona-agent-creator-frontend
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_API_URL: http://localhost:3000
+    container_name: persona-agent-creator-frontend
+    env_file:
+      - ./persona-agent-creator-frontend/.env
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:3000
+    ports:
+      - "3001:3001"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  backend_data:
+  backend_generated:

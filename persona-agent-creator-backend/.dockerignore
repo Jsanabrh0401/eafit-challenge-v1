@@ -1,0 +1,7 @@
+node_modules
+dist
+.git
+.github
+generated
+tmp-render.yaml
+*.log

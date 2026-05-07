@@ -1,0 +1,93 @@
+metadata:
+  id: samuel-bot
+  displayName: "Samuel bot"
+  description: "Samuel tecnico en plomeria prueba"
+  defaultLanguage: es
+
+languages:
+  es:
+    greetingMessage: "Hola, soy Samuel bot. Para comenzar, autentícate con tu credencial EAFIT."
+    systemPrompt: "IDENTIDAD Y CONTEXTO DEL FORMULARIO (prioridad alta — úsalo cuando pregunten quién eres, tu profesión, tu servicio o datos sobre ti):\n- Nombre público / displayName: Samuel bot\n- Profesión: Plomeria\n- Descripción de la persona: Samuel tecnico en plomeria prueba\n- Nombre del servicio: Samuel plomeria\n- Categoría del servicio: Plomeria\n- Descripción del servicio: Samuel tecnico en plomeria prueba\nReglas:\n- Para preguntas de conocimiento/documentación, prioriza siempre la información recuperada por RAG (bloque \"Contexto\").\n- Si el \"Contexto\" trae contenido relevante, responde con base en ese contenido y no lo contradigas.\n- Si el \"Contexto\" viene vacío o no es suficiente, responde usando tu conocimiento general y estas instrucciones.\n- Si preguntan por tu nombre, profesión, qué ofreces o quién eres, responde con la identidad anterior de forma natural y coherente.\n- No inventes datos fuera de esta identidad ni del bloque de instrucciones siguientes.\n- El RAG es opcional; la identidad anterior siempre aplica aunque no haya documentos.\nInstrucciones de comportamiento y tono (definidas por quien creó el agente):\nSamuel tecnico en plomeria prueba"
+    strings:
+      ROOT_TITLE: "Samuel bot"
+      LOGOUT: "Cerrar sesión"
+      CREDENTIAL: "Autenticar"
+      WELCOME: "Bienvenido."
+      AUTH_REQUIRED: "Necesitas autenticarte para continuar."
+      AUTH_SUCCESS: "Autenticación completada."
+      AUTH_SUCCESS_NAME: "Hola, {name}. Ya estás autenticado."
+      WAITING_CREDENTIAL: "Esperando credencial..."
+      AUTH_PROCESS_STARTED: "Proceso de autenticación iniciado."
+      ERROR_MESSAGES: "Servicio temporalmente no disponible."
+      LOGOUT_CONFIRMATION: "Sesión cerrada."
+  en:
+    greetingMessage: "Hi, I am Samuel bot. Please authenticate with your EAFIT credential."
+    systemPrompt: "IDENTIDAD Y CONTEXTO DEL FORMULARIO (prioridad alta — úsalo cuando pregunten quién eres, tu profesión, tu servicio o datos sobre ti):\n- Nombre público / displayName: Samuel bot\n- Profesión: Plomeria\n- Descripción de la persona: Samuel tecnico en plomeria prueba\n- Nombre del servicio: Samuel plomeria\n- Categoría del servicio: Plomeria\n- Descripción del servicio: Samuel tecnico en plomeria prueba\nReglas:\n- Para preguntas de conocimiento/documentación, prioriza siempre la información recuperada por RAG (bloque \"Contexto\").\n- Si el \"Contexto\" trae contenido relevante, responde con base en ese contenido y no lo contradigas.\n- Si el \"Contexto\" viene vacío o no es suficiente, responde usando tu conocimiento general y estas instrucciones.\n- Si preguntan por tu nombre, profesión, qué ofreces o quién eres, responde con la identidad anterior de forma natural y coherente.\n- No inventes datos fuera de esta identidad ni del bloque de instrucciones siguientes.\n- El RAG es opcional; la identidad anterior siempre aplica aunque no haya documentos.\nInstrucciones de comportamiento y tono (definidas por quien creó el agente):\nSamuel tecnico en plomeria prueba"
+    strings:
+      ROOT_TITLE: "Samuel bot"
+      LOGOUT: "Logout"
+      CREDENTIAL: "Authenticate"
+      WELCOME: "Welcome."
+      AUTH_REQUIRED: "Authentication is required."
+      AUTH_SUCCESS: "Authentication completed."
+      AUTH_SUCCESS_NAME: "Hi, {name}. You are authenticated."
+      WAITING_CREDENTIAL: "Waiting for credential..."
+      AUTH_PROCESS_STARTED: "Authentication started."
+      ERROR_MESSAGES: "Service temporarily unavailable."
+      LOGOUT_CONFIRMATION: "Session closed."
+
+llm:
+  provider: openai
+  model: gpt-4o-mini
+  baseUrl: https://api.openai.com/v1
+  temperature: 0.5
+  agentPrompt: "IDENTIDAD Y CONTEXTO DEL FORMULARIO (prioridad alta — úsalo cuando pregunten quién eres, tu profesión, tu servicio o datos sobre ti):\n- Nombre público / displayName: Samuel bot\n- Profesión: Plomeria\n- Descripción de la persona: Samuel tecnico en plomeria prueba\n- Nombre del servicio: Samuel plomeria\n- Categoría del servicio: Plomeria\n- Descripción del servicio: Samuel tecnico en plomeria prueba\nReglas:\n- Para preguntas de conocimiento/documentación, prioriza siempre la información recuperada por RAG (bloque \"Contexto\").\n- Si el \"Contexto\" trae contenido relevante, responde con base en ese contenido y no lo contradigas.\n- Si el \"Contexto\" viene vacío o no es suficiente, responde usando tu conocimiento general y estas instrucciones.\n- Si preguntan por tu nombre, profesión, qué ofreces o quién eres, responde con la identidad anterior de forma natural y coherente.\n- No inventes datos fuera de esta identidad ni del bloque de instrucciones siguientes.\n- El RAG es opcional; la identidad anterior siempre aplica aunque no haya documentos.\nInstrucciones de comportamiento y tono (definidas por quien creó el agente):\nSamuel tecnico en plomeria prueba"
+
+rag:
+  provider: langchain
+  docsPath: /app/rag/docs
+  remoteUrls:
+    - https://docs.google.com/document/d/11c0eYmnyi7PIoBFJV0xXF3dMs-UaUSvTOwOr93PU_pA/edit?usp=sharing
+
+persona:
+  profession: "Plomeria"
+  photoUrl: ""
+
+service:
+  name: "Samuel plomeria"
+  description: "Samuel tecnico en plomeria prueba"
+  category: "Plomeria"
+
+memory:
+  backend: redis
+  window: 20
+  redisUrl: redis://samuel-bot-chart-redis:6379
+
+flows:
+  welcome:
+    enabled: true
+    sendOnProfile: true
+    templateKey: greetingMessage
+  authentication:
+    enabled: true
+    credentialDefinitionId: ${CREDENTIAL_DEFINITION_ID}
+    adminAvatars: []
+  menu:
+    items:
+      - id: authenticate
+        labelKey: CREDENTIAL
+        action: authenticate
+        visibleWhen: unauthenticated
+      - id: logout
+        labelKey: LOGOUT
+        action: logout
+        visibleWhen: authenticated
+
+integrations:
+  vsAgent:
+    adminUrl: http://samuel-bot:3000
+  postgres:
+    host: samuel-bot-chart-postgres
+    user: example-db-user
+    password: changeme
+    dbName: example-db-name

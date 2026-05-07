@@ -1,0 +1,84 @@
+chartSource: oci://registry-1.docker.io/io2060/hologram-generic-ai-agent-chart
+chartVersion: v1.11.2
+
+global:
+  domain: agents.team-e.teams.eafit.testnet.verana.network
+
+nameOverride: 'samuel-chart'
+
+credentialDefinitionId: ''
+
+chatbot:
+  ingress:
+    enabled: false
+  env:
+    - name: APP_PORT
+      value: '3003'
+    - name: LOG_LEVEL
+      value: '3'
+    - name: LLM_PROVIDER
+      value: 'openai'
+    - name: OPENAI_MODEL
+      value: 'llama-3.3-70b-versatile'
+    - name: OPENAI_BASE_URL
+      value: 'https://api.groq.com/openai/v1'
+    - name: VECTOR_STORE
+      value: 'redis'
+    - name: VECTOR_INDEX_NAME
+      value: 'samuel_index'
+    - name: RAG_PROVIDER
+      value: 'langchain'
+    - name: RAG_DOCS_PATH
+      value: '/app/rag/docs'
+    - name: AGENT_MEMORY_BACKEND
+      value: 'redis'
+    - name: AGENT_MEMORY_WINDOW
+      value: '20'
+    - name: REDIS_URL
+      value: 'redis://samuel-chart-redis.{{ .Release.Namespace }}:6379'
+    - name: VS_AGENT_ADMIN_URL
+      value: 'http://samuel.{{ .Release.Namespace }}:3000'
+    - name: POSTGRES_HOST
+      value: 'samuel-chart-postgres.{{ .Release.Namespace }}'
+    - name: CREDENTIAL_DEFINITION_ID
+      value: ''
+    - name: GOOGLE_CALENDAR_MCP_URL
+      value: ''
+    - name: WIKIPEDIA_MCP_URL
+      value: ''
+    - name: WEATHER_MCP_URL
+      value: ''
+    - name: WEATHER_MCP_API_KEY
+      value: ''
+  agentPack:
+    enabled: true
+    name: samuel
+    mountPath: /app/agent-packs/samuel
+    fileName: agent-pack.yaml
+    existingConfigMap: 'samuel-chart-agent-pack'
+
+stats:
+  enabled: false
+
+artemis:
+  enabled: false
+
+vs-agent-chart:
+  name: samuel
+  didcommLabel: 'Samuel'
+  didcommInvitationImageUrl: 'https://hologram.zone/images/github.svg'
+  eventsBaseUrl: http://samuel-chart-chatbot:3003
+  ingress:
+    host: "samuel.{{ .Values.global.domain }}"
+    tlsSecret: "samuel.{{ .Values.global.domain }}-cert"
+  extraEnv:
+    - name: AGENT_WALLET_ID
+      value: "Samuel"
+    - name: AGENT_WALLET_KEY
+      value: ""
+    - name: USE_CORS
+      value: "true"
+    - name: REDIS_HOST
+      value: "samuel-chart-redis"
+    - name: AGENT_LOG_LEVEL
+      value: "3"
