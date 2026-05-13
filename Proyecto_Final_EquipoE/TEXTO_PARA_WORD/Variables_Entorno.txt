@@ -1,0 +1,39 @@
+================================================================================
+VARIABLES DE ENTORNO (REFERENCIA — SIN SECRETOS)
+================================================================================
+Autor: Juan Pablo Sanabria Hoyos | Mayo 2026
+================================================================================
+No pegar API keys ni kubeconfig en documentos públicos.
+
+BACKEND (persona-agent-creator-backend)
+----------------------------------------
+PORT                    Puerto del API (ej. 3000)
+JWT_SECRET              Firma de tokens JWT
+DB_PATH                 Ruta archivo JSON si se usa persistencia en archivo
+GOOGLE_CLIENT_ID        OAuth Google (alineado con frontend)
+GITHUB_CLIENT_ID        OAuth GitHub
+GITHUB_CLIENT_SECRET    Secreto OAuth GitHub (solo servidor)
+BASE_DOMAIN               Dominio base de URLs públicas de agentes
+GENERATED_OUTPUT_DIR    Carpeta de YAML generados
+K8S_NAMESPACE             Namespace Kubernetes (ej. team-e)
+KUBECONFIG_PATH           Ruta absoluta al kubeconfig en la máquina del API
+AGENT_CHART_SOURCE        URL OCI del chart Helm
+AGENT_CHART_VERSION       Versión del chart
+CREDENTIAL_DEFINITION_ID  Definición de credencial Verana
+OPENAI_API_KEY            Clave para LLM/RAG del agente desplegado
+OPENAI_MODEL              Modelo (ej. gpt-4o-mini)
+OPENAI_BASE_URL           Endpoint compatible OpenAI
+GROQ_API_KEY              Opcional si aplica respaldo
+EXAMPLE_AGENT_POSTGRES_PASSWORD
+EXAMPLE_AGENT_MCP_CONFIG_ENCRYPTION_KEY
+EXAMPLE_AGENT_WALLET_KEY
+EXAMPLE_AGENT_VSAGENT_DB_PASSWORD
+ORG_VS_ADMIN_URL
+ECS_TR_PUBLIC_URL
+
+FRONTEND (persona-agent-creator-frontend)
+------------------------------------------
+NEXT_PUBLIC_API_URL           URL base del backend
+NEXT_PUBLIC_GOOGLE_CLIENT_ID
+NEXT_PUBLIC_GITHUB_CLIENT_ID
+NEXT_PUBLIC_IMGBB_API_KEY     Opcional (subida de imágenes)

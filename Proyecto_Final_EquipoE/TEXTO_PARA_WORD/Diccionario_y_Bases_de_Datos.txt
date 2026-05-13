@@ -1,0 +1,26 @@
+================================================================================
+BASES DE DATOS Y DATASETS (ÍTEM 9)
+================================================================================
+Autor: Juan Pablo Sanabria Hoyos | Mayo 2026
+================================================================================
+
+DATASET ESTÁTICO ÚNICO
+-----------------------
+No aplica un único corpus de entrenamiento descargable: el RAG usa URLs de documentos que define el usuario en el formulario.
+
+DICCIONARIO DE DATOS — PLATAFORMA
+----------------------------------
+Usuario: id, nombre, email, hash de contraseña, fecha de creación.
+Bot (agente): id, userId, slug, persona (nombre, profesión, descripción, foto opcional), servicio (nombre, categoría, descripción), temperatura, prompt, mcpServers, ragUrls, fechas, isPublished, publicUrl, k8sReleaseName, k8sNamespace, etc.
+
+BASES DE DATOS EN EL AGENTE PUBLICADO (KUBERNETES)
+----------------------------------------------------
+El chart Helm despliega PostgreSQL y Redis para el runtime del agente (chatbot y servicios asociados según la versión del chart).
+
+FUENTES DE INFORMACIÓN (RAG)
+----------------------------
+Enlaces HTTPS a PDFs, páginas o exportaciones de texto; enlaces de Drive/Docs pueden normalizarse en el backend para indexación más eficiente.
+
+SCRIPTS DE LIMPIEZA
+--------------------
+No hay corpus global obligatorio; scripts auxiliares de prueba (si existen) pueden anexarse en 05_Datasets al comprimir el ZIP.

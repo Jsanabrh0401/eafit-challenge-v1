@@ -1,0 +1,50 @@
+================================================================================
+MANUAL DE USUARIO — Persona AI Agent Creator
+================================================================================
+Autor: Juan Pablo Sanabria Hoyos | Mayo 2026
+================================================================================
+
+1. INTRODUCCIÓN
+---------------
+Persona AI Agent Creator es una aplicación web para crear un agente de conversación con identidad y servicio, definir comportamiento y documentos (RAG), y publicarlo en la infraestructura del reto para usarlo con Hologram u otros medios habilitados por el curso.
+
+2. REQUISITOS
+-------------
+• Navegador actualizado (Chrome, Edge o Firefox).
+• Correo para registro, o Google/GitHub si el administrador activó OAuth.
+• Conexión a Internet.
+
+3. CÓMO INGRESAR AL SISTEMA
+---------------------------
+1) Abrir la URL del entorno (la que indique el instructor) o http://localhost en desarrollo.
+2) Si no tiene cuenta: Registro → nombre, correo, contraseña → enviar.
+3) Si ya tiene cuenta: Iniciar sesión con correo/contraseña o botones OAuth.
+4) Tras el login, accede al Panel (dashboard) de agentes.
+
+4. FUNCIONALIDADES PRINCIPALES
+------------------------------
+• Crear agente en cuatro pasos (Persona, Servicio, Comportamiento, Resumen).
+• Editar agente desde la tarjeta en la lista.
+• Publicar / Despublicar (requiere backend con Kubernetes configurado).
+• Eliminar agente (con confirmación; no se deshace).
+• Cerrar sesión desde el encabezado del panel.
+
+5. USO DEL FORMULARIO POR PASOS
+--------------------------------
+Paso 1 — Persona: nombre público, profesión/rol, descripción. Opcional: URL https de imagen liviana (no pegar base64 enorme).
+Paso 2 — Servicio: nombre, categoría, descripción de qué ayuda el agente.
+Paso 3 — Comportamiento: temperatura, instrucciones (prompt), URLs de documentos (una por línea), al menos un MCP marcado.
+Paso 4 — Resumen: revisar y pulsar Crear agente o Guardar cambios.
+
+6. CASOS DE USO
+---------------
+A) Consulta interna: agente con PDFs de procedimientos en RAG.
+B) Demo local: crear y guardar sin publicar.
+C) Agente público: publicar y abrir enlace o Hologram según instructivo del curso.
+
+7. ERRORES COMUNES Y RECOMENDACIONES
+-------------------------------------
+• No carga el panel: verificar que el backend esté en ejecución y NEXT_PUBLIC_API_URL correcta.
+• OAuth falla: revisar configuración con el administrador del entorno.
+• Publicación lenta: reducir tamaño/cantidad de documentos RAG; esperar a que los pods estén Running.
+• Agente no responde tras publicar: revisar logs del clúster con el instructor.

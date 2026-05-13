@@ -1,0 +1,42 @@
+================================================================================
+BITÁCORA / REGISTRO DE TRABAJO
+================================================================================
+Autor: Juan Pablo Sanabria Hoyos | Proyecto: Persona AI Agent Creator | Mayo 2026
+================================================================================
+
+REGISTRO DE SESIONES (representativo)
+--------------------------------------
+| Fecha      | Horas | Tipo        | Actividades y resultados |
+| feb 2026   | 3     | Setup       | Fork/clon, Node/pnpm, primera compilación backend y frontend. |
+| mar 2026   | 8     | Desarrollo  | Auth JWT, dashboard, CRUD agentes, formulario multipaso. |
+| abr 2026   | 10    | Integración | Publicación Helm, OAuth, ajustes RAG y prompts, pruebas en namespace. |
+| may 2026   | 6     | Cierre      | Docker Compose, documentación de entrega, revisión final. |
+
+HITOS DEL CRONOGRAMA
+-------------------
+• MVP autenticación y dashboard — marzo 2026 — Completado.
+• CRUD agentes y formulario — marzo 2026 — Completado.
+• Publicación Kubernetes — abril 2026 — Completado.
+• RAG, OAuth, Docker — mayo 2026 — Completado.
+• Entrega documental — mayo 2026 — Completado.
+
+DECISIONES TÉCNICAS
+-------------------
+• Ejecutar Helm/kubectl solo desde el backend (kubeconfig no en el navegador).
+• Normalizar URLs de documentos (p. ej. Drive) para reducir carga en indexación RAG.
+• JWT en rutas protegidas de /bots.
+
+PROBLEMAS Y SOLUCIONES
+----------------------
+• 401 en RAG/embeddings: alinear OPENAI_API_KEY en backend y secretos del chart.
+• Hidratación React en /dashboard: alinear primer render con estado de montaje del cliente.
+• Frontend en Docker reiniciando: corregir comando next start con puerto explícito.
+• kubeconfig Unauthorized: renovar token con el proveedor del clúster.
+
+DISTRIBUCIÓN DE ROLES
+----------------------
+Juan Pablo Sanabria Hoyos: desarrollo full-stack del Persona AI Agent Creator (frontend Next.js, backend NestJS), integración con Kubernetes/Helm según alcance del reto, documentación y preparación de la entrega.
+
+EVIDENCIAS ADICIONALES
+----------------------
+Colocar capturas en la carpeta 06_Evidencias (reuniones, roadmap, PRs, pantallas de la app) al comprimir el ZIP final.

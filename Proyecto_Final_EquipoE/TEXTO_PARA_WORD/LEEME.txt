@@ -1,0 +1,23 @@
+ARCHIVOS .TXT (UTF-8) — ENTREGA DOCUMENTAL
+==========================================
+
+Integrante: Juan Pablo Sanabria Hoyos
+
+Abrir con Bloc de notas o el editor que prefieras (UTF-8).
+Si el curso lo permite, adjunta los .txt al correo de entrega.
+
+Lista:
+  LEEME.txt
+  README_Proyecto.txt
+  Informe_Final.txt
+  Manual_Usuario.txt
+  Manual_Tecnico.txt
+  Bitacora.txt
+  Evidencias_IA.txt
+  Reflexion_Final_Equipo.txt
+  Guia_Repositorio.txt
+  Variables_Entorno.txt
+  Contenido_Presentacion.txt
+  Guion_Video_Demo.txt
+  Diccionario_y_Bases_de_Datos.txt
+  Evidencias_Proceso.txt

@@ -4,6 +4,8 @@
 
 [Presentation visual](https://gamma.app/docs/Generative-AIAI-Verificable-Agents-with-MCP-and-Hologram-Messagin-ct9hco3bnqj9zog)
 
+> **Entrega final académica:** documentos en `.txt` en [`Proyecto_Final_EquipoE/TEXTO_PARA_WORD/`](./Proyecto_Final_EquipoE/TEXTO_PARA_WORD/) — ver [`LEEME_ENTREGA_FINAL.md`](./LEEME_ENTREGA_FINAL.md).
+
 ---
 
 ## Tabla de Contenidos

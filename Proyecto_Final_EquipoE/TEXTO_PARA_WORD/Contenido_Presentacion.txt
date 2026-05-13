@@ -1,0 +1,49 @@
+================================================================================
+PRESENTACIÓN FINAL — GUIÓN DE DIAPOSITIVAS
+================================================================================
+Autor: Juan Pablo Sanabria Hoyos | Mayo 2026
+================================================================================
+Copiar cada bloque a una diapositiva en PowerPoint o Canva. Exportar Presentacion_Final.pdf o .pptx.
+
+--- DIAPOSITIVA 1 — TÍTULO ---
+Persona AI Agent Creator
+Plataforma para agentes de IA verificables
+Juan Pablo Sanabria Hoyos
+Beca IA Ser ANDI — Verana × NODO EAFIT
+
+--- DIAPOSITIVA 2 — PROBLEMA ---
+• Configurar agentes verificables exige YAML, Helm y Kubernetes.
+• Los usuarios de negocio no pueden invertir semanas en infraestructura.
+• Hologram exige confianza en la identidad del agente.
+
+--- DIAPOSITIVA 3 — SOLUCIÓN ---
+• Web full-stack con formulario guiado.
+• Publicación centralizada vía API y Helm.
+• Integración con el chart y el dominio del laboratorio.
+
+--- DIAPOSITIVA 4 — DEMO (qué grabar) ---
+• Login y dashboard.
+• Crear agente en 4 pasos.
+• Publicar y mostrar URL o estado en clúster.
+• Mensaje de prueba al agente.
+
+--- DIAPOSITIVA 5 — ARQUITECTURA ---
+Next.js → NestJS → persistencia → YAML + Helm → Kubernetes (vs-agent, chatbot, DB, Redis).
+
+--- DIAPOSITIVA 6 — USO DE IA ---
+• Producto: LLM + RAG en el agente publicado.
+• Proceso: Cursor, ChatGPT, Copilot para documentación y depuración asistida.
+
+--- DIAPOSITIVA 7 — RESULTADOS ---
+• Flujo completo operativo en el laboratorio.
+• Documentación de usuario y técnica.
+
+--- DIAPOSITIVA 8 — APRENDIZAJES Y RETOS ---
+Aprendizaje: integración extremo a extremo y trabajo con estándares abiertos.
+Retos: arranque RAG, kubeconfig, hidratación en React.
+
+--- DIAPOSITIVA 9 — FUTURO ---
+CI/CD, base de datos relacional con migraciones, tests e2e, observabilidad.
+
+--- DIAPOSITIVA 10 — CIERRE ---
+Gracias. Entrega según instrucciones del curso a fgutierrc1@eafit.edu.co.

@@ -1,0 +1,22 @@
+================================================================================
+GUIÓN VIDEO DEMO (3 A 7 MINUTOS)
+================================================================================
+Autor: Juan Pablo Sanabria Hoyos | Mayo 2026
+================================================================================
+
+INCLUIR LA URL DEL VIDEO EN EL MISMO CORREO QUE EL ZIP/DRIVE A fgutierrc1@eafit.edu.co
+(para evitar enlaces rotos dentro de archivos).
+
+CRONOGRAMA SUGERIDO
+-------------------
+0:00–0:25  Saludo, nombre del proyecto, problema en una frase.
+0:25–1:15  Ampliar problema (Kubernetes, usuarios no técnicos).
+1:15–4:00  DEMO: login → crear agente (pasos) → guardar → publicar → comprobar.
+4:00–5:15  Resultado: el agente responde; mencionar RAG si probaste con un doc corto.
+5:15–6:15  IA: modelo del producto + herramientas usadas en el desarrollo (sin leer secretos en voz alta).
+6:15–7:00  Cierre: aprendizaje principal y agradecimiento.
+
+CHECKLIST ANTES DE GRABAR
+-------------------------
+Cuenta de prueba lista. RAG con documento pequeño. 1080p. Audio claro.
+No mostrar .env ni tokens en pantalla.

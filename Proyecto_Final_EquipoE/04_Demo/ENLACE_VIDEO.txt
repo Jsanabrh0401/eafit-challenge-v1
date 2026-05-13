@@ -1,0 +1,3 @@
+Instrucciones para el evaluador:
+El video demo (3 a 7 minutos) se publica en YouTube (p. ej. "no listado") o en Google Drive con permiso de visualización.
+Incluir la URL definitiva en el correo a fgutierrc1@eafit.edu.co junto con el enlace único del paquete de entrega (ZIP o carpeta Drive), para evitar enlaces rotos si el archivo se mueve.

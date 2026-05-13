@@ -1,0 +1,2 @@
+Usar el guión en: ../TEXTO_PARA_WORD/Contenido_Presentacion.txt
+Pasar cada bloque "DIAPOSITIVA" a PowerPoint o Canva y exportar Presentacion_Final.pdf o .pptx en esta carpeta.

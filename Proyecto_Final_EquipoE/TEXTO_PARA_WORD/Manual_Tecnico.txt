@@ -1,0 +1,61 @@
+================================================================================
+MANUAL TÉCNICO — Persona AI Agent Creator
+================================================================================
+Autor: Juan Pablo Sanabria Hoyos | Mayo 2026
+================================================================================
+
+1. STACK
+--------
+Node.js 20 LTS (recomendado), pnpm, NestJS 11, Next.js 16, TypeScript, Docker/Docker Compose, Kubernetes, Helm 3.
+
+2. CONFIGURACIÓN DEL ENTORNO
+----------------------------
+Clonar el monorepo. Copiar persona-agent-creator-backend/.env.example y persona-agent-creator-frontend/.env.example a .env en cada proyecto. No commitear secretos.
+
+3. INSTALACIÓN Y EJECUCIÓN LOCAL
+---------------------------------
+Backend:
+  cd persona-agent-creator-backend
+  pnpm install
+  pnpm run start:dev
+
+Frontend:
+  cd persona-agent-creator-frontend
+  pnpm install
+  pnpm run dev
+
+Docker (si existe en la raíz):
+  docker compose up --build
+
+4. DESPLIEGUE DEL AGENTE (KUBERNETES)
+--------------------------------------
+El API genera agent-pack.yaml y deployment.yaml bajo GENERATED_OUTPUT_DIR, crea ConfigMap y secretos, y ejecuta helm upgrade --install. Requiere kubectl y helm en PATH y KUBECONFIG_PATH válido en la máquina que ejecuta el backend.
+
+Comandos de verificación:
+  helm list -n <namespace>
+  kubectl get pods -n <namespace>
+  helm status <release> -n <namespace>
+
+5. VARIABLES DE ENTORNO (RESUMEN)
+----------------------------------
+Backend: PORT, JWT_SECRET, DB_PATH, GOOGLE_CLIENT_ID, GITHUB_CLIENT_ID/SECRET, BASE_DOMAIN, GENERATED_OUTPUT_DIR, K8S_NAMESPACE, KUBECONFIG_PATH, AGENT_CHART_SOURCE/VERSION, CREDENTIAL_DEFINITION_ID, OPENAI_API_KEY, OPENAI_MODEL, OPENAI_BASE_URL, EXAMPLE_AGENT_POSTGRES_PASSWORD, EXAMPLE_AGENT_MCP_CONFIG_ENCRYPTION_KEY, EXAMPLE_AGENT_WALLET_KEY, EXAMPLE_AGENT_VSAGENT_DB_PASSWORD, ORG_VS_ADMIN_URL, ECS_TR_PUBLIC_URL.
+
+Frontend: NEXT_PUBLIC_API_URL, NEXT_PUBLIC_GOOGLE_CLIENT_ID, NEXT_PUBLIC_GITHUB_CLIENT_ID, NEXT_PUBLIC_IMGBB_API_KEY (opcional).
+
+Detalle sin secretos: duplicar la lista en un anexo si el curso pide tabla aparte.
+
+6. ARQUITECTURA DEL SISTEMA
+---------------------------
+Cliente Next.js → API NestJS → persistencia → generación YAML → Helm → clúster (vs-agent, chatbot, Postgres, Redis según chart).
+
+7. DEPENDENCIAS (NPM)
+----------------------
+Ver package.json y pnpm-lock.yaml en backend y frontend.
+
+8. CONFIGURACIÓN DE MODELOS IA
+------------------------------
+OPENAI_API_KEY y variables relacionadas se inyectan en el secret del chatbot del chart. Modelo y base URL configurables por entorno.
+
+9. MANTENIMIENTO
+----------------
+Logs: consola NestJS y kubectl logs. Renovar kubeconfig. helm rollback ante fallos. Actualizar dependencias con pnpm outdated y pruebas de regresión.

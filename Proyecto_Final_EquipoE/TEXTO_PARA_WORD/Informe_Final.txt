@@ -1,0 +1,87 @@
+================================================================================
+INFORME TÉCNICO FINAL — Persona AI Agent Creator
+================================================================================
+Autor: Juan Pablo Sanabria Hoyos
+Programa: Beca IA Ser ANDI — Verana × NODO EAFIT | Mayo 2026
+================================================================================
+
+RESUMEN EJECUTIVO
+-----------------
+Este informe describe una plataforma web full-stack que permite definir la persona y el servicio de un agente de IA, configurar instrucciones, temperatura, documentos para RAG y herramientas MCP, y publicar el agente en Kubernetes mediante el chart del reto (ecosistema Verana / Hologram). El backend NestJS centraliza autenticación, persistencia y la orquestación Helm/kubectl; el frontend Next.js ofrece registro, login, dashboard y formulario guiado por pasos.
+
+1. CONTEXTO DEL RETO
+--------------------
+Verana aporta identidad descentralizada (DIDs) y credenciales verificables (VC). Hologram permite interactuar con agentes de IA verificables. El reto pide un servicio en línea que acerque la creación de agentes personales a usuarios sin conocimiento profundo de infraestructura, conectando el formulario con el despliegue real y el flujo de confianza del laboratorio.
+
+2. DEFINICIÓN DEL PROBLEMA
+--------------------------
+2.1 Problema de usuario
+Configurar y publicar un agente implica YAML, Helm, secretos y dominios; es inaccesible para muchos perfiles no técnicos.
+
+2.2 Problema técnico
+Coordinar agent-pack.yaml, valores Helm, API keys de OpenAI, Postgres y wallet del agente sin exponer secretos en el repositorio ni en el navegador del usuario final.
+
+3. JUSTIFICACIÓN DE LA SOLUCIÓN
+------------------------------
+Una aplicación web con API dedicada reduce errores de configuración, deja trazabilidad de los artefactos generados por agente y concentra el kubeconfig en el servidor que ejecuta la publicación, coherente con un entorno académico controlado.
+
+4. METODOLOGÍA DE DESARROLLO
+----------------------------
+Ciclos iterativos: diseño de UI, implementación de API, pruebas locales, integración Docker cuando aplica, pruebas en el namespace del clúster. Integración mediante ramas Git y revisión de cambios.
+
+5. ARQUITECTURA TÉCNICA
+-----------------------
+• Cliente: Next.js (App Router), TypeScript, Tailwind.
+• Servidor: NestJS — módulos Auth, Bots, Data.
+• Persistencia de la plataforma: archivo JSON configurable (DB_PATH) u otra según el fork.
+• Publicación: generación de YAML en disco; kubectl apply de ConfigMap/secretos; helm upgrade --install.
+• Runtime del agente: componentes del chart (chatbot, vs-agent, Postgres, Redis según versión).
+
+6. FLUJO DE DATOS
+-----------------
+1) Registro/login → JWT en el cliente.
+2) CRUD de agentes → persistencia local del servicio.
+3) Publicación → manifiestos + Helm → actualización de metadatos (URL pública, release, namespace).
+4) Usuario final → Hologram o URL pública según entorno.
+
+7. BASES DE DATOS UTILIZADAS
+-----------------------------
+• Plataforma: usuarios y bots (slug, persona, servicio, prompt, ragUrls, mcpServers, flags de publicación).
+• Agente en clúster: PostgreSQL y Redis del Helm chart para el runtime del agente publicado.
+• RAG: documentos referenciados por URL; no hay un único dataset estático centralizado obligatorio.
+
+8. APIs Y SERVICIOS IMPLEMENTADOS
+---------------------------------
+POST /auth/register, /auth/login, /auth/google, /auth/github
+GET /bots, POST /bots, GET /bots/:id, PATCH /bots/:id, DELETE /bots/:id
+POST /bots/:id/publish, POST /bots/:id/unpublish
+GET /bots/mcp-catalog (catálogo MCP)
+
+Modelo de IA: OpenAI o endpoint compatible (OPENAI_MODEL, OPENAI_BASE_URL, OPENAI_API_KEY en secretos del despliegue).
+
+9. COMPONENTES DE IA
+---------------------
+Instrucciones al modelo priorizan identidad y servicio del formulario; luego contexto RAG cuando exista; conocimiento general como respaldo. MCP seleccionables desde la UI. Embeddings y pipeline RAG según configuración del chart publicado.
+
+10. RESULTADOS OBTENIDOS
+-------------------------
+Flujo completo de creación, edición, eliminación y publicación documentado; despliegue local con Docker Compose cuando está configurado; procedimientos de verificación en clúster (helm list, kubectl get pods).
+
+11. DIFICULTADES ENCONTRADAS
+----------------------------
+• Arranque de vs-agent y chatbot durante indexación RAG pesada.
+• Límites de tamaño en claims de imagen de invitación (logo).
+• Hidratación en React cuando el estado de sesión depende de localStorage.
+• Caducidad de kubeconfig en el laboratorio.
+
+12. CONCLUSIONES
+----------------
+La plataforma cumple el rol de fachada y orquestador entre el usuario y la complejidad de Kubernetes y Verana, con trazabilidad en archivos generados y en la base de datos de la aplicación.
+
+13. RECOMENDACIONES
+-------------------
+Motor relacional con migraciones; pruebas e2e; CI/CD; observabilidad y roles administrativos.
+
+REFERENCIAS
+-----------
+Repositorio del reto Verana/EAFIT, documentación oficial de Next.js, NestJS, Kubernetes y Helm; documentación del chart del agente provisto en el challenge.

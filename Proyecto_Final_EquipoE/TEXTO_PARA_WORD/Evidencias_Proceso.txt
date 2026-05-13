@@ -1,0 +1,31 @@
+================================================================================
+EVIDENCIAS DEL PROCESO DE TRABAJO (ÍTEM 6)
+================================================================================
+Autor: Juan Pablo Sanabria Hoyos | Mayo 2026
+================================================================================
+
+ORGANIZACIÓN DE CARPETAS (06_Evidencias)
+-----------------------------------------
+Al comprimir la entrega, incluir archivos reales en:
+• reuniones/ — actas o capturas de videollamadas (sin datos sensibles de terceros).
+• roadmap/ — captura de tablero Kanban, Notion o cronograma.
+• prototipos/ — wireframes o exportaciones de diseño.
+• desarrollo/ — capturas de PR, CI en verde.
+• capturas/ — pantallas finales de la aplicación y, si aplica, kubectl/helm.
+• ia/ — capturas anonimizadas del uso de asistentes IA (opcional).
+
+BITÁCORA DETALLADA
+------------------
+Ver Bitacora.txt en esta carpeta TEXTO_PARA_WORD.
+
+DECISIONES TÉCNICAS (resumen)
+------------------------------
+Helm solo desde backend; normalización de URLs RAG; JWT en rutas de bots.
+
+PROBLEMAS Y SOLUCIONES
+----------------------
+Ver tabla en Bitacora.txt.
+
+ROL
+---
+Juan Pablo Sanabria Hoyos: desarrollo full-stack del Persona AI Agent Creator, integración con despliegue en Kubernetes según alcance del reto, documentación y preparación de la entrega.

@@ -1,0 +1,50 @@
+================================================================================
+EVIDENCIAS DEL USO DE INTELIGENCIA ARTIFICIAL
+================================================================================
+Autor: Juan Pablo Sanabria Hoyos | Mayo 2026
+================================================================================
+
+1. HERRAMIENTAS IA UTILIZADAS
+------------------------------
+• Cursor (editor con asistente): autocompletado, refactors, explicación de errores TypeScript y de compilación.
+• ChatGPT: borradores de textos de interfaz, resumen de documentación de Helm, checklists de prueba manual.
+• GitHub Copilot: sugerencias puntuales de código en el editor.
+
+2. MODELOS UTILIZADOS (ASISTENCIA AL DESARROLLO)
+-------------------------------------------------
+Modelos conversacionales de los proveedores anteriores (p. ej. familia GPT en ChatGPT, modelo del asistente en Cursor) para redacción, síntesis y depuración asistida.
+
+3. MODELOS UTILIZADOS (DENTRO DEL PRODUCTO)
+---------------------------------------------
+El agente publicado utiliza un modelo de lenguaje configurable vía API compatible con OpenAI (OPENAI_MODEL, OPENAI_BASE_URL, OPENAI_API_KEY en el despliegue). Los embeddings y el pipeline RAG dependen de la configuración del chart y del proveedor configurado.
+
+4. PARA QUÉ SE USÓ IA EN EL PROYECTO
+------------------------------------
+• Acelerar comprensión de errores de Kubernetes y NestJS.
+• Borradores de mensajes y etiquetas de UI.
+• Propuestas de estructura de componentes React.
+• Exploración de formulación de prompts (prioridad RAG vs identidad).
+
+5. QUÉ HIZO LA IA VS. QUÉ SE HIZO MANUALMENTE
+----------------------------------------------
+Con asistencia IA: primeros borradores de documentación, explicación de stack traces, esqueletos de funciones auxiliares.
+
+Manual e imprescindible: configuración de OAuth en consolas de terceros, pruebas reales en el clúster, manejo de secretos y kubeconfig, revisiones de merge, ajuste final de comportamiento del agente tras pruebas con el entorno real.
+
+6. PROCESO DE ADOPCIÓN
+-----------------------
+Normas: no pegar secretos en chats de IA; contrastar respuestas con documentación oficial; revisar siempre el diff antes de integrar. La IA se usó como copiloto, no como única fuente de verdad.
+
+7. DIFICULTADES CON IA
+----------------------
+• Sugerencias de código desactualizadas respecto a la versión de Next.js usada.
+• Respuestas plausibles pero incorrectas sobre flags de Helm: mitigación verificando contra el chart real del reto.
+
+8. UTILIDAD PERCIBIDA EN PROYECTOS REALES
+-----------------------------------------
+Alta como acelerador de tareas repetitivas y de aprendizaje, siempre con validación humana y pruebas. No sustituye el criterio técnico ni la responsabilidad sobre el despliegue.
+
+9. APRENDIZAJES
+----------------
+• La trazabilidad (commits, informes) ayuda a separar decisiones humanas de sugerencias automáticas.
+• La calidad del prompt al asistente correlaciona con la calidad del resultado.

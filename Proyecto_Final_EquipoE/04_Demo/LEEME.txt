@@ -1,0 +1,2 @@
+Guión del video: ../TEXTO_PARA_WORD/Guion_Video_Demo.txt
+Notas sobre el enlace del video: ENLACE_VIDEO.txt

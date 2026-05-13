@@ -1,0 +1,1 @@
+Contenido: ../TEXTO_PARA_WORD/Diccionario_y_Bases_de_Datos.txt

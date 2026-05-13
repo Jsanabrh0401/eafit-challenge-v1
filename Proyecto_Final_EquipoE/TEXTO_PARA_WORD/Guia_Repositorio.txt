@@ -1,0 +1,37 @@
+================================================================================
+GUÍA DEL REPOSITORIO (ÍTEM 1 RÚBRICA)
+================================================================================
+Autor: Juan Pablo Sanabria Hoyos | Mayo 2026
+================================================================================
+
+ENLACE AL REPOSITORIO
+---------------------
+Incluir en el correo de entrega el enlace público al repositorio GitHub/GitLab del fork (si aplica). Si la entrega es solo ZIP, el código fuente completo va en las carpetas persona-agent-creator-backend y persona-agent-creator-frontend dentro del ZIP.
+
+CÓDIGO FUENTE
+-------------
+Monorepo con backend NestJS y frontend Next.js más archivos de configuración del reto (README, docker-compose, etc.).
+
+HISTORIAL DE COMMITS
+---------------------
+Disponible en Git: git log --oneline --graph
+
+DEPENDENCIAS
+------------
+pnpm; archivos package.json y pnpm-lock.yaml en backend y frontend.
+
+VARIABLES DE ENTORNO
+--------------------
+Ver archivo Variables_Entorno.txt en esta misma carpeta TEXTO_PARA_WORD (o el documento Variables_Entorno generado). No incluir valores secretos en entregas públicas.
+
+INSTALACIÓN Y EJECUCIÓN
+-----------------------
+Ver Manual_Tecnico.txt en TEXTO_PARA_WORD.
+
+ESTRUCTURA DEL PROYECTO
+-----------------------
+eafit-challenge-v1/
+  persona-agent-creator-backend/
+  persona-agent-creator-frontend/
+  docker-compose.yml (si aplica)
+  Proyecto_Final_EquipoE/   (entrega documental)

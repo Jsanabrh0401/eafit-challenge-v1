@@ -1,0 +1,29 @@
+================================================================================
+REFLEXIÓN FINAL DEL EQUIPO
+================================================================================
+Autor: Juan Pablo Sanabria Hoyos | Mayo 2026
+================================================================================
+
+¿QUÉ APRENDIÓ DURANTE EL PROCESO?
+---------------------------------
+Integración extremo a extremo entre interfaz web, API, generación de manifiestos y orquestación en Kubernetes, además del vínculo con identidad verificable y el flujo de Hologram según el laboratorio del reto.
+
+¿QUÉ HARÍA DIFERENTE?
+---------------------
+Planear pruebas en clúster desde etapas más tempranas y añadir pruebas automatizadas mínimas sobre los endpoints críticos de publicación.
+
+¿QUÉ FUE LO MÁS DIFÍCIL?
+------------------------
+Conciliar los tiempos de arranque del agente (RAG, vs-agent, chatbot) con expectativas de respuesta inmediata en demos, y diagnosticar fallos que mezclan la red del clúster con errores de aplicación.
+
+¿QUÉ PARTE CONSIDERA MÁS VALIOSA?
+---------------------------------
+El salto entre un formulario accesible y un despliegue real en el entorno del reto, cercano a un proyecto de industria.
+
+¿CÓMO SE SIENTE ABORDANDO PROYECTOS CON IA?
+--------------------------------------------
+Con más seguridad para usar IA como copiloto en tareas delimitadas, manteniendo la responsabilidad de validación y pruebas en entorno real.
+
+¿QUÉ PERCEPCIÓN TIENE SOBRE IA EN DESARROLLO TECNOLÓGICO?
+---------------------------------------------------------
+La IA es una capa de productividad que complementa buenas prácticas de ingeniería; en entornos con datos sensibles la gobernanza y el control de versiones son aún más relevantes.
